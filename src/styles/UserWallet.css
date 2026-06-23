@@ -1,0 +1,620 @@
+/* =====================================================================
+   UserWallet.css
+   Breakpoints: 1024px | 768px | 420px — prefixed uw- to avoid conflicts
+   ===================================================================== */
+
+/* ── Summary Banner ── */
+.uw-summary-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #134e4a 0%, #0f3d39 100%);
+    border-radius: 14px;
+    padding: 18px 28px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.uw-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 28px;
+}
+
+.uw-summary-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.uw-summary-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.uw-summary-value--green {
+    color: #6ee7b7;
+}
+
+.uw-summary-value--credit {
+    color: #6ee7b7;
+}
+
+.uw-summary-value--debit {
+    color: #fca5a5;
+}
+
+.uw-summary-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+}
+
+/* ── Header ── */
+.uw-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.uw-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary, #1a1a2e);
+    margin: 0 0 4px;
+}
+
+.uw-header p {
+    font-size: 13px;
+    color: var(--text-muted, #888);
+    margin: 0;
+}
+
+/* ── Search ── */
+.uw-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 10px;
+    padding: 8px 14px;
+    min-width: 280px;
+    max-width: 360px;
+}
+
+.uw-search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13.5px;
+    color: var(--text-primary, #1a1a2e);
+    width: 100%;
+}
+
+.uw-search-bar input::placeholder {
+    color: var(--text-muted, #bbb);
+}
+
+.uw-search-clear {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text-muted, #aaa);
+    font-size: 12px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.uw-search-clear:hover {
+    color: var(--text-primary, #1a1a2e);
+}
+
+/* ── Filters ── */
+.uw-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.uw-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.uw-filter-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text-muted, #aaa);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    flex-shrink: 0;
+    min-width: 46px;
+}
+
+.uw-chip {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border, #e5e7eb);
+    background: var(--surface, #fff);
+    color: var(--text-secondary, #555);
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    white-space: nowrap;
+}
+
+.uw-chip:hover {
+    border-color: #059669;
+    color: #059669;
+}
+
+.uw-chip.active {
+    background: #059669;
+    border-color: #059669;
+    color: #fff;
+}
+
+.uw-chip--type:hover {
+    border-color: #7c3aed;
+    color: #7c3aed;
+}
+
+.uw-chip--type.active {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: #fff;
+}
+
+/* ── Grid ── */
+.uw-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+/* ── Card ── */
+.uw-card {
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, #e8eaed);
+    border-radius: 16px;
+    padding: 18px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.uw-card:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px);
+}
+
+.uw-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.uw-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #059669, #047857);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.uw-header-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.uw-user-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary, #1a1a2e);
+}
+
+.uw-user-phone {
+    font-size: 12px;
+    color: var(--text-muted, #888);
+}
+
+.uw-badges-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+/* ── Status badges ── */
+.uw-status-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10.5px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.uw-status-badge--cancelled_by_user {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.uw-status-badge--cancelled_by_vendor {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.uw-status-badge--completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.uw-status-badge--pending {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.uw-type-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10.5px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.uw-type-badge--credit {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.uw-type-badge--debit {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ── Booking row ── */
+.uw-booking-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.uw-booking-number {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-secondary, #444);
+}
+
+.uw-mini-badge {
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.uw-mini-badge--paid,
+.uw-mini-badge--completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.uw-mini-badge--pending {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+/* ── Vendor info ── */
+.uw-vendor-info {
+    margin-bottom: 12px;
+}
+
+.uw-vendor-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 9px 12px;
+}
+
+.uw-vendor-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.uw-vendor-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+}
+
+.uw-vendor-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary, #1a1a2e);
+}
+
+.uw-shop-name {
+    font-size: 11.5px;
+    color: var(--text-muted, #888);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.uw-vendor-phone {
+    font-size: 11.5px;
+    color: var(--text-secondary, #666);
+    flex-shrink: 0;
+    font-weight: 500;
+}
+
+/* ── UPI row ── */
+.uw-upi-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    padding: 0 2px;
+}
+
+.uw-upi-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted, #aaa);
+    flex-shrink: 0;
+}
+
+.uw-upi-value {
+    font-size: 12.5px;
+    color: var(--text-secondary, #555);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Divider ── */
+.uw-divider {
+    border: none;
+    border-top: 1px solid var(--border, #f0f2f5);
+    margin: 12px 0;
+}
+
+/* ── Amount grid ── */
+.uw-amount-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px 14px;
+}
+
+.uw-amount-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.uw-amount-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted, #aaa);
+    font-weight: 700;
+}
+
+.uw-amount-value {
+    font-size: 13px;
+    color: var(--text-secondary, #444);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.uw-amount-value--refund {
+    color: #059669;
+}
+
+/* ── Refund row ── */
+.uw-refund-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+}
+
+.uw-refund-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #166534;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.uw-refund-icon {
+    font-size: 14px;
+}
+
+.uw-refund-amount {
+    font-size: 17px;
+    font-weight: 800;
+    color: #166534;
+}
+
+/* ── Reason chip ── */
+.uw-reason-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fdf2f8;
+    border: 1.5px dashed #f0abfc;
+    border-radius: 10px;
+    padding: 7px 12px;
+    margin-bottom: 10px;
+}
+
+.uw-reason-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #701a75;
+    flex-shrink: 0;
+}
+
+.uw-reason-value {
+    font-size: 12.5px;
+    color: #4a044e;
+    font-weight: 500;
+}
+
+/* ── Dates row ── */
+.uw-dates-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted, #aaa);
+}
+
+.uw-booking-id-small {
+    font-size: 11px;
+    color: var(--text-muted, #bbb);
+}
+
+/* ── Loading / Empty ── */
+.uw-loading,
+.uw-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 64px 20px;
+    color: var(--text-muted, #aaa);
+    font-size: 14px;
+}
+
+.uw-loading span,
+.uw-empty span {
+    font-size: 36px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .uw-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .uw-search-bar {
+        min-width: 240px;
+    }
+
+    .uw-header h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .uw-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .uw-search-bar {
+        min-width: unset;
+        max-width: 100%;
+    }
+
+    .uw-summary-banner {
+        padding: 16px;
+    }
+
+    .uw-summary-item {
+        padding: 0 14px;
+    }
+
+    .uw-summary-divider {
+        height: 24px;
+    }
+}
+
+@media (max-width: 420px) {
+    .uw-header h1 {
+        font-size: 18px;
+    }
+
+    .uw-card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .uw-amount-grid {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .uw-refund-amount {
+        font-size: 16px;
+    }
+
+    .uw-badges-stack {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .uw-summary-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .uw-summary-item {
+        padding: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .uw-summary-divider {
+        width: 100%;
+        height: 1px;
+    }
+}

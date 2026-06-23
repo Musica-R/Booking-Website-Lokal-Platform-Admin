@@ -1,0 +1,112 @@
+/* ========== PAYMENT REPORT ========== */
+
+/* Stats grid — 4 columns on desktop */
+.pr-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+/* Stat icon colour variants */
+.pr-icon-revenue {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.pr-icon-bookings {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.pr-icon-customers {
+  background: #f0fdf4;
+  color: #22c55e;
+}
+
+.pr-icon-avg {
+  background: #EEF3FF;
+  color: #246BFD;
+}
+
+/* Table cell helpers */
+.pr-serial {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.pr-bookings-cell {
+  text-align: center;
+}
+
+.pr-amount {
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.pr-date {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* ========== TABLET — 1024px ========== */
+@media (max-width: 1024px) {
+  .pr-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* ========== SMALL TABLET / LARGE MOBILE — 768px ========== */
+@media (max-width: 768px) {
+  .pr-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  /* Hide less critical columns to keep table readable */
+  .pr-hide-768 {
+    display: none;
+  }
+
+  .pr-date {
+    font-size: 12px;
+  }
+
+  .pr-amount {
+    font-size: 13px;
+  }
+}
+
+/* ========== MOBILE — 420px ========== */
+@media (max-width: 420px) {
+  .pr-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  /* Stack customer name + email tighter */
+  .user-info-cell .name {
+    font-size: 12.5px;
+  }
+
+  .user-info-cell .sub {
+    font-size: 11px;
+  }
+
+  .pr-amount {
+    font-size: 12.5px;
+  }
+
+  .pr-date {
+    font-size: 11px;
+  }
+
+  /* Tighten badge padding */
+  .badge {
+    padding: 2px 7px;
+    font-size: 10.5px;
+  }
+}

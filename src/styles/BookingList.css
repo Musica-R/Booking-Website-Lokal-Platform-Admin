@@ -1,0 +1,581 @@
+/* ===================================================
+   BookingList.css — Admin Booking Management Styles
+   Responsive: 1024px | 768px | 420px
+   =================================================== */
+
+/* ---------- Root Tokens ---------- */
+:root {
+  --bl-bg: #f5f6fa;
+  --bl-surface: #ffffff;
+  --bl-border: #e8eaf0;
+  --bl-shadow: 0 1px 4px rgba(0, 0, 0, 0.07), 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  --bl-primary: #4f6ef7;
+  --bl-primary-light: #eef0fe;
+  --bl-primary-hover: #3a58e0;
+
+  --bl-text-primary: #1a1d2e;
+  --bl-text-secondary: #5a6078;
+  --bl-text-muted: #9499b0;
+
+  --bl-success: #16a34a;
+  --bl-success-bg: #dcfce7;
+  --bl-warning: #b45309;
+  --bl-warning-bg: #fef3c7;
+  --bl-danger: #dc2626;
+  --bl-danger-bg: #fee2e2;
+  --bl-info: #0369a1;
+  --bl-info-bg: #e0f2fe;
+  --bl-secondary: #475569;
+  --bl-secondary-bg: #f1f5f9;
+
+  --bl-radius: 10px;
+  --bl-radius-sm: 6px;
+  --bl-font: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ---------- Wrapper ---------- */
+.bl-wrapper {
+  font-family: var(--bl-font);
+  color: var(--bl-text-primary);
+  padding: 28px 32px;
+  min-height: 100vh;
+  background: var(--bl-bg);
+  box-sizing: border-box;
+}
+
+/* ---------- Page Header ---------- */
+.bl-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.bl-header-left h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin: 0 0 4px;
+  color: var(--bl-text-primary);
+}
+
+.bl-header-left p {
+  font-size: 13px;
+  color: var(--bl-text-muted);
+  margin: 0;
+}
+
+.bl-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ---------- Search Bar ---------- */
+.bl-search {
+  position: relative;
+  width: 260px;
+}
+
+.bl-search svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--bl-text-muted);
+  pointer-events: none;
+  width: 15px;
+  height: 15px;
+}
+
+.bl-search input {
+  width: 100%;
+  padding: 8px 12px 8px 34px;
+  border: 1.5px solid var(--bl-border);
+  border-radius: var(--bl-radius-sm);
+  font-size: 13.5px;
+  font-family: var(--bl-font);
+  color: var(--bl-text-primary);
+  background: var(--bl-surface);
+  outline: none;
+  transition: border-color 0.18s;
+  box-sizing: border-box;
+}
+
+.bl-search input:focus {
+  border-color: var(--bl-primary);
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.1);
+}
+
+.bl-search input::placeholder {
+  color: var(--bl-text-muted);
+}
+
+/* ---------- Filter Tabs ---------- */
+.bl-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.bl-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border: 1.5px solid var(--bl-border);
+  background: var(--bl-surface);
+  color: var(--bl-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--bl-font);
+  white-space: nowrap;
+}
+
+.bl-filter-btn:hover {
+  border-color: var(--bl-primary);
+  color: var(--bl-primary);
+  background: var(--bl-primary-light);
+}
+
+.bl-filter-btn.active {
+  background: var(--bl-primary);
+  border-color: var(--bl-primary);
+  color: #fff;
+}
+
+/* ---------- Card ---------- */
+.bl-card {
+  background: var(--bl-surface);
+  border: 1px solid var(--bl-border);
+  border-radius: var(--bl-radius);
+  box-shadow: var(--bl-shadow);
+  overflow: hidden;
+}
+
+/* ---------- Table Wrapper ---------- */
+.bl-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Table ---------- */
+.bl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.bl-table thead tr {
+  background: #f8f9fc;
+  border-bottom: 1.5px solid var(--bl-border);
+}
+
+.bl-table thead th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--bl-text-muted);
+  white-space: nowrap;
+}
+
+.bl-table tbody tr {
+  border-bottom: 1px solid var(--bl-border);
+  transition: background 0.1s;
+}
+
+.bl-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.bl-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.bl-table td {
+  padding: 13px 16px;
+  vertical-align: middle;
+  color: var(--bl-text-primary);
+}
+
+/* ---------- Cell: ID ---------- */
+.bl-cell-id {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bl-text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Cell: Booking Number ---------- */
+.bl-cell-booking-no {
+  font-size: 11.5px;
+  color: var(--bl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Customer ---------- */
+.bl-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bl-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.bl-user-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.bl-user-sub {
+  font-size: 11.5px;
+  color: var(--bl-text-muted);
+  margin-top: 1px;
+}
+
+/* ---------- Cell: Vendor ---------- */
+.bl-vendor-name {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.bl-shop-name {
+  font-size: 11.5px;
+  color: var(--bl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Date & Time ---------- */
+.bl-date {
+  font-size: 13px;
+  color: var(--bl-text-secondary);
+  white-space: nowrap;
+}
+
+.bl-time {
+  font-size: 11.5px;
+  color: var(--bl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Amount ---------- */
+.bl-amount-total {
+  font-weight: 700;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.bl-amount-balance {
+  font-size: 11px;
+  color: var(--bl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Payment ---------- */
+.bl-payment-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ---------- Badges ---------- */
+.bl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bl-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.75;
+}
+
+.bl-badge.completed   { background: var(--bl-success-bg); color: var(--bl-success); }
+.bl-badge.pending     { background: var(--bl-warning-bg); color: var(--bl-warning); }
+.bl-badge.confirmed   { background: var(--bl-info-bg);    color: var(--bl-info); }
+.bl-badge.cancelled_by_user,
+.bl-badge.cancelled_by_vendor { background: var(--bl-danger-bg); color: var(--bl-danger); }
+.bl-badge.paid        { background: var(--bl-success-bg); color: var(--bl-success); }
+.bl-badge.unpaid      { background: var(--bl-danger-bg);  color: var(--bl-danger); }
+.bl-badge.secondary   { background: var(--bl-secondary-bg); color: var(--bl-secondary); }
+
+/* ---------- States ---------- */
+.bl-state {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--bl-text-muted);
+}
+
+.bl-state-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.bl-state p {
+  font-size: 14px;
+  margin: 0;
+  color: var(--bl-text-secondary);
+}
+
+.bl-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--bl-border);
+  border-top-color: var(--bl-primary);
+  border-radius: 50%;
+  animation: bl-spin 0.75s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes bl-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Refresh Button ---------- */
+.bl-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--bl-border);
+  border-radius: var(--bl-radius-sm);
+  background: var(--bl-surface);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bl-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--bl-font);
+}
+
+.bl-refresh-btn:hover {
+  border-color: var(--bl-primary);
+  color: var(--bl-primary);
+}
+
+/* ===================================================
+   RESPONSIVE — 1024px (Tablet Landscape)
+   =================================================== */
+@media (max-width: 1024px) {
+  .bl-wrapper {
+    padding: 22px 20px;
+  }
+
+  .bl-search {
+    width: 220px;
+  }
+
+  /* Hide less critical columns: booking number sub-row and balance */
+  .bl-table thead th:nth-child(6),
+  .bl-table tbody td:nth-child(6) {
+    /* Payment Status column - keep but shrink */
+    display: none;
+  }
+
+  .bl-table th,
+  .bl-table td {
+    padding: 11px 12px;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — 768px (Tablet Portrait)
+   =================================================== */
+@media (max-width: 768px) {
+  .bl-wrapper {
+    padding: 16px 14px;
+  }
+
+  .bl-header {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .bl-header-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .bl-search {
+    width: 100%;
+    flex: 1;
+  }
+
+  .bl-header-left h1 {
+    font-size: 19px;
+  }
+
+  /* Switch to card-style rows instead of wide table */
+  .bl-table,
+  .bl-table thead,
+  .bl-table tbody,
+  .bl-table tr,
+  .bl-table th,
+  .bl-table td {
+    display: block;
+  }
+
+  .bl-table thead {
+    display: none;
+  }
+
+  .bl-table tbody tr {
+    border: 1px solid var(--bl-border);
+    border-radius: var(--bl-radius-sm);
+    margin: 0 12px 10px;
+    padding: 12px;
+    background: var(--bl-surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .bl-table tbody tr:last-child {
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--bl-border);
+  }
+
+  .bl-table td {
+    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border: none;
+    font-size: 13px;
+  }
+
+  .bl-table td::before {
+    content: attr(data-label);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--bl-text-muted);
+    min-width: 90px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .bl-card {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+
+  .bl-table-wrapper {
+    overflow-x: visible;
+  }
+
+  .bl-filters {
+    gap: 5px;
+  }
+
+  .bl-filter-btn {
+    font-size: 12px;
+    padding: 5px 11px;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — 420px (Mobile Small)
+   =================================================== */
+@media (max-width: 420px) {
+  .bl-wrapper {
+    padding: 12px 10px;
+  }
+
+  .bl-header-left h1 {
+    font-size: 17px;
+  }
+
+  .bl-header-left p {
+    font-size: 12px;
+  }
+
+  .bl-header-right {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .bl-search {
+    width: 100%;
+  }
+
+  .bl-refresh-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bl-filters {
+    gap: 4px;
+  }
+
+  .bl-filter-btn {
+    font-size: 11.5px;
+    padding: 4px 10px;
+  }
+
+  .bl-table tbody tr {
+    margin: 0 0 10px;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .bl-table td {
+    font-size: 12.5px;
+    gap: 6px;
+  }
+
+  .bl-table td::before {
+    font-size: 10px;
+    min-width: 80px;
+  }
+
+  .bl-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .bl-badge {
+    font-size: 10.5px;
+    padding: 2px 7px;
+  }
+
+  .bl-amount-total {
+    font-size: 13px;
+  }
+}

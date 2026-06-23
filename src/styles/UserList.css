@@ -1,0 +1,184 @@
+/* ========== AVATAR ========== */
+.user-avatars {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.user-avatars-img,
+.user-avatars-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.user-avatars-img {
+  object-fit: cover;
+}
+
+.user-avatars-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-light, #EEF3FF), #c7d7fd);
+  color: var(--primary, #246BFD);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ========== USER LIST ========== */
+
+.ul-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+/* Stat icon colour variants */
+.ul-icon-users    { background: #EEF3FF; color: #246BFD; }
+.ul-icon-bookings { background: #fffbeb; color: #f59e0b; }
+.ul-icon-revenue  { background: #f5f3ff; color: #7c3aed; }
+
+/* Table cell helpers */
+.ul-serial { color: var(--text-muted); font-weight: 500; }
+.ul-amount { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+.ul-date   { font-size: 12.5px; color: var(--text-muted); white-space: nowrap; }
+
+/* ── Tablet 1024px ── */
+@media (max-width: 1024px) {
+  .ul-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .user-avatars {
+    width: 36px;
+    height: 36px;
+  }
+
+  .user-avatars-placeholder {
+    font-size: 13px;
+  }
+}
+
+/* ── Mobile 767px ── */
+@media (max-width: 767px) {
+  .ul-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .ul-stats-grid .stat-card {
+    padding: 14px 10px;
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ul-stats-grid .stat-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .ul-stats-grid .stat-value {
+    font-size: 16px;
+  }
+
+  .ul-stats-grid .stat-label {
+    font-size: 10.5px;
+  }
+
+  /* Hide lower-priority columns */
+  .ul-col-serial,
+  .ul-col-location,
+  .ul-col-joined {
+    display: none;
+  }
+
+  /* User cell */
+  .user-info-cell .name {
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+
+  .user-info-cell .sub {
+    font-size: 11px;
+    white-space: nowrap;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ul-amount {
+    font-size: 12.5px;
+  }
+
+  /* Avatar */
+  .user-avatars {
+    width: 32px;
+    height: 32px;
+  }
+
+  .user-avatars-placeholder {
+    font-size: 12px;
+  }
+}
+
+/* ── Extra small 480px ── */
+@media (max-width: 480px) {
+  .ul-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .ul-stats-grid .stat-card {
+    padding: 10px 8px;
+    gap: 6px;
+  }
+
+  .ul-stats-grid .stat-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .ul-stats-grid .stat-value {
+    font-size: 14px;
+  }
+
+  .ul-stats-grid .stat-label {
+    font-size: 9.5px;
+  }
+
+  /* Hide phone column */
+  .ul-col-phone {
+    display: none;
+  }
+
+  .ul-amount {
+    font-size: 12px;
+  }
+
+  .user-info-cell .sub {
+    max-width: 80px;
+  }
+
+  .badge {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  /* Avatar */
+  .user-avatars {
+    width: 28px;
+    height: 28px;
+  }
+
+  .user-avatars-placeholder {
+    font-size: 11px;
+  }
+}

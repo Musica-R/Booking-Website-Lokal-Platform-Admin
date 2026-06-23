@@ -1,0 +1,186 @@
+/* ========== DASHBOARD ========== */
+
+/* Two-column layout for vendor/user cards */
+.db-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* List inside cards */
+.db-list {
+  padding: 12px 0 0;
+}
+
+.db-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.db-list-item:last-child {
+  border-bottom: none;
+}
+
+.db-list-info {
+  flex: 1;
+  min-width: 0; /* allow text truncation */
+}
+
+.db-list-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.db-list-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.db-list-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.db-list-amount {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.db-list-bookings {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Category chips */
+.db-category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.db-category-chip {
+  background: var(--primary-light);
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.db-category-count {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary);
+}
+
+.db-category-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── Tablet 1024px ── */
+@media (max-width: 1024px) {
+  .db-two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .db-list-item {
+    padding: 10px 16px;
+  }
+}
+
+/* ── Mobile 767px ── */
+@media (max-width: 767px) {
+
+  /* Stack vendor + user cards vertically */
+  .db-two-col {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .db-list-item {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .db-list-name {
+    font-size: 13px;
+  }
+
+  .db-list-sub {
+    font-size: 11.5px;
+  }
+
+  .db-list-amount {
+    font-size: 12.5px;
+  }
+
+  .db-list-bookings {
+    font-size: 10.5px;
+  }
+
+  /* Smaller category chips */
+  .db-category-chip {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .db-category-count {
+    font-size: 16px;
+  }
+
+  .db-category-label {
+    font-size: 12px;
+  }
+}
+
+/* ── Extra small 480px ── */
+@media (max-width: 480px) {
+  .db-list-item {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  /* Hide sub-text on very small screens */
+  .db-list-sub {
+    display: none;
+  }
+
+  .db-list-name {
+    font-size: 12.5px;
+  }
+
+  .db-category-chip {
+    padding: 7px 10px;
+  }
+
+  .db-category-count {
+    font-size: 15px;
+  }
+
+  .db-category-label {
+    font-size: 11.5px;
+  }
+
+  /* Avatar smaller */
+  .db-list-item .user-avatar-placeholder {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+}

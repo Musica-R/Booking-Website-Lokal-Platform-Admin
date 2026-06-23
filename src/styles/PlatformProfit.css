@@ -1,0 +1,491 @@
+/* =====================================================================
+   PlatformProfit.css
+   Breakpoints: 1024px | 768px | 420px — prefixed pp- to avoid conflicts
+   ===================================================================== */
+
+/* ── Summary Banner ── */
+.pp-summary-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 14px;
+    padding: 18px 28px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.pp-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 28px;
+}
+
+.pp-summary-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.pp-summary-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.pp-summary-value--green {
+    color: #4ade80;
+}
+
+.pp-summary-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+}
+
+/* ── Header ── */
+.pp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.pp-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary, #1a1a2e);
+    margin: 0 0 4px;
+}
+
+.pp-header p {
+    font-size: 13px;
+    color: var(--text-muted, #888);
+    margin: 0;
+}
+
+/* ── Search ── */
+.pp-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 10px;
+    padding: 8px 14px;
+    min-width: 280px;
+    max-width: 360px;
+}
+
+.pp-search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13.5px;
+    color: var(--text-primary, #1a1a2e);
+    width: 100%;
+}
+
+.pp-search-bar input::placeholder {
+    color: var(--text-muted, #bbb);
+}
+
+.pp-search-clear {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text-muted, #aaa);
+    font-size: 12px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.pp-search-clear:hover {
+    color: var(--text-primary, #1a1a2e);
+}
+
+/* ── Filters ── */
+.pp-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.pp-chip {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border, #e5e7eb);
+    background: var(--surface, #fff);
+    color: var(--text-secondary, #555);
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    white-space: nowrap;
+}
+
+.pp-chip:hover {
+    border-color: #0ea5e9;
+    color: #0ea5e9;
+}
+
+.pp-chip.active {
+    background: #0ea5e9;
+    border-color: #0ea5e9;
+    color: #fff;
+}
+
+/* ── Grid ── */
+.pp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+/* ── Card ── */
+.pp-card {
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, #e8eaed);
+    border-radius: 16px;
+    padding: 18px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.pp-card:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px);
+}
+
+.pp-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.pp-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pp-header-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.pp-vendor-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary, #1a1a2e);
+}
+
+.pp-shop-name {
+    font-size: 12px;
+    color: var(--text-muted, #888);
+}
+
+/* ── Status badges ── */
+.pp-status-badge {
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.pp-status-badge--cancelled_by_user {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.pp-status-badge--cancelled_by_vendor {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.pp-status-badge--completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.pp-status-badge--pending {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.pp-status-badge--confirmed {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+/* ── Booking row ── */
+.pp-booking-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.pp-booking-number {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-secondary, #444);
+}
+
+.pp-mini-badge {
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.pp-mini-badge--paid,
+.pp-mini-badge--completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.pp-mini-badge--pending {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+/* ── Divider ── */
+.pp-divider {
+    border: none;
+    border-top: 1px solid var(--border, #f0f2f5);
+    margin: 12px 0;
+}
+
+/* ── Amount grid ── */
+.pp-amount-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px 14px;
+}
+
+.pp-amount-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pp-amount-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted, #aaa);
+    font-weight: 700;
+}
+
+.pp-amount-value {
+    font-size: 13px;
+    color: var(--text-secondary, #444);
+    font-weight: 600;
+}
+
+.pp-amount-value--profit {
+    color: #0284c7;
+}
+
+.pp-phone {
+    font-size: 11px;
+    color: var(--text-muted, #999);
+    font-weight: 400;
+}
+
+/* ── Profit row ── */
+.pp-profit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+}
+
+.pp-profit-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #075985;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pp-profit-icon {
+    font-size: 14px;
+}
+
+.pp-profit-amount {
+    font-size: 17px;
+    font-weight: 800;
+    color: #075985;
+}
+
+/* ── Reason chip ── */
+.pp-reason-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fef9ec;
+    border: 1.5px dashed #fcd34d;
+    border-radius: 10px;
+    padding: 7px 12px;
+    margin-bottom: 10px;
+}
+
+.pp-reason-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #92400e;
+    flex-shrink: 0;
+}
+
+.pp-reason-value {
+    font-size: 12.5px;
+    color: #78350f;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+/* ── Dates row ── */
+.pp-dates-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted, #aaa);
+}
+
+.pp-booking-id-small {
+    font-size: 11px;
+    color: var(--text-muted, #bbb);
+}
+
+/* ── Loading / Empty ── */
+.pp-loading,
+.pp-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 64px 20px;
+    color: var(--text-muted, #aaa);
+    font-size: 14px;
+}
+
+.pp-loading span,
+.pp-empty span {
+    font-size: 36px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .pp-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .pp-search-bar {
+        min-width: 240px;
+    }
+
+    .pp-header h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pp-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .pp-search-bar {
+        min-width: unset;
+        max-width: 100%;
+    }
+
+    .pp-summary-banner {
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .pp-summary-item {
+        padding: 0 16px;
+    }
+
+    .pp-summary-divider {
+        height: 24px;
+    }
+}
+
+@media (max-width: 420px) {
+    .pp-header h1 {
+        font-size: 18px;
+    }
+
+    .pp-card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .pp-amount-grid {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .pp-profit-amount {
+        font-size: 16px;
+    }
+
+    .pp-summary-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .pp-summary-item {
+        padding: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pp-summary-divider {
+        width: 100%;
+        height: 1px;
+    }
+}
