@@ -3,6 +3,7 @@ import "../styles/UserWallet.css";
 
 const API_BASE = process.env.REACT_APP_API_URL_IMAGE;
 const TOKEN = () => localStorage.getItem("lokal_token");
+const PAGE_SIZE = 6;
 
 const bookingStatusLabel = {
   cancelled_by_user: "Cancelled by User",
@@ -45,6 +46,40 @@ const formatTime = (d) => {
     hour12: true,
   });
 };
+
+function Pagination({ total, page, onPage }) {
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+  if (totalPages <= 1) return null;
+
+  const from = (page - 1) * PAGE_SIZE + 1;
+  const to   = Math.min(page * PAGE_SIZE, total);
+
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== "…") {
+      pages.push("…");
+    }
+  }
+
+  return (
+    <div className="uw-pagination">
+      <span className="uw-pagination-info">
+        Showing {from}–{to} of {total}
+      </span>
+      <div className="uw-pagination-controls">
+        <button className="uw-page-btn" onClick={() => onPage(page - 1)} disabled={page === 1} aria-label="Previous">‹</button>
+        {pages.map((p, i) =>
+          p === "…"
+            ? <span key={`e-${i}`} className="uw-page-ellipsis">…</span>
+            : <button key={p} className={`uw-page-btn${p === page ? " active" : ""}`} onClick={() => onPage(p)}>{p}</button>
+        )}
+        <button className="uw-page-btn" onClick={() => onPage(page + 1)} disabled={page === totalPages} aria-label="Next">›</button>
+      </div>
+    </div>
+  );
+}
 
 /* ══════════════════════════════════════════
    WalletCard
@@ -184,6 +219,7 @@ export default function UserWallet() {
   const [typeFilter, setTypeFilter] = useState("All");
   const [loading, setLoading] = useState(true);
   const [totalRefunded, setTotalRefunded] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     (async () => {
@@ -237,10 +273,12 @@ export default function UserWallet() {
       );
     }
     setFiltered(list);
+    setPage(1);
   }, [search, statusFilter, typeFilter, wallets]);
 
   const creditCount = wallets.filter((w) => w.type === "credit").length;
   const debitCount = wallets.filter((w) => w.type === "debit").length;
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div>
@@ -342,11 +380,14 @@ export default function UserWallet() {
           <p>No wallet records match your search.</p>
         </div>
       ) : (
-        <div className="uw-grid">
-          {filtered.map((item) => (
-            <WalletCard key={item.id} item={item} />
-          ))}
-        </div>
+        <>
+          <div className="uw-grid">
+            {paginated.map((item) => (
+              <WalletCard key={item.id} item={item} />
+            ))}
+          </div>
+          <Pagination total={filtered.length} page={page} onPage={setPage} />
+        </>
       )}
     </div>
   );

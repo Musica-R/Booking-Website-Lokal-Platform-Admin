@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 const navItems = [
   { to: "/dashboard", icon: "📊", label: "Dashboard" },
   { to: "/vendors", icon: "🔧", label: "Vendor List" },
+  { to: "/activity", icon: "🎮", label: "Activity Vendor List" },
+  { to: "/near", icon: "🛒", label: "Nearby Quick Stalls" },
   { to: "/users", icon: "👥", label: "User List" },
   { to: "/bookings", icon: "📅", label: "Booking List" },
   { to: "/payment-report", icon: "💳", label: "Payment Report" },

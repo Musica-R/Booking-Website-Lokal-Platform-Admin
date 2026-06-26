@@ -534,6 +534,65 @@
     font-size: 36px;
 }
 
+.uw-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 4px 8px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.uw-pagination-info {
+    font-size: 13px;
+    color: #888;
+}
+
+.uw-pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.uw-page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid #2e2e3a;
+    background: #1e1e2a;
+    color: #ccc;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.uw-page-btn:hover:not(:disabled):not(.active) {
+    background: #2a2a3a;
+    border-color: #c9a84c44;
+    color: #fff;
+}
+
+.uw-page-btn.active {
+    background: #c9a84c;
+    border-color: #c9a84c;
+    color: #1a1a1a;
+    font-weight: 700;
+    cursor: default;
+}
+
+.uw-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.uw-page-ellipsis {
+    color: #555;
+    padding: 0 4px;
+    font-size: 14px;
+    user-select: none;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
     .uw-grid {

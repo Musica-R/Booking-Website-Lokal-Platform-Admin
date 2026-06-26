@@ -383,7 +383,42 @@
   border-color: var(--bl-primary);
   color: var(--bl-primary);
 }
+.bl-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 0;
+  flex-wrap: wrap;
+}
 
+.bl-page-btn {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #374151;
+  transition: all 0.15s;
+}
+
+.bl-page-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.bl-page-btn.active {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+  font-weight: 600;
+}
+
+.bl-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 /* ===================================================
    RESPONSIVE — 1024px (Tablet Landscape)
    =================================================== */

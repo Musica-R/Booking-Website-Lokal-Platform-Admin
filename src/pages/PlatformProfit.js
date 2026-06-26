@@ -3,6 +3,7 @@ import "../styles/PlatformProfit.css";
 
 const API_BASE = process.env.REACT_APP_API_URL_IMAGE;
 const TOKEN = () => localStorage.getItem("lokal_token");
+const PAGE_SIZE = 10;
 
 const bookingStatusLabel = {
     cancelled_by_user: "Cancelled by User",
@@ -38,6 +39,40 @@ const formatTime = (d) => {
         hour12: true,
     });
 };
+
+function Pagination({ total, page, onPage }) {
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    if (totalPages <= 1) return null;
+
+    const from = (page - 1) * PAGE_SIZE + 1;
+    const to   = Math.min(page * PAGE_SIZE, total);
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+            pages.push(i);
+        } else if (pages[pages.length - 1] !== "…") {
+            pages.push("…");
+        }
+    }
+
+    return (
+        <div className="pp-pagination">
+            <span className="pp-pagination-info">
+                Showing {from}–{to} of {total}
+            </span>
+            <div className="pp-pagination-controls">
+                <button className="pp-page-btn" onClick={() => onPage(page - 1)} disabled={page === 1} aria-label="Previous">‹</button>
+                {pages.map((p, i) =>
+                    p === "…"
+                        ? <span key={`e-${i}`} className="pp-page-ellipsis">…</span>
+                        : <button key={p} className={`pp-page-btn${p === page ? " active" : ""}`} onClick={() => onPage(p)}>{p}</button>
+                )}
+                <button className="pp-page-btn" onClick={() => onPage(page + 1)} disabled={page === totalPages} aria-label="Next">›</button>
+            </div>
+        </div>
+    );
+}
 
 /* ══════════════════════════════════════════
    ProfitCard
@@ -150,6 +185,7 @@ export default function PlatformProfit() {
     const [statusFilter, setStatusFilter] = useState("All");
     const [loading, setLoading] = useState(true);
     const [totalProfit, setTotalProfit] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         (async () => {
@@ -181,6 +217,8 @@ export default function PlatformProfit() {
         ...new Set(profits.map((p) => p.booking_status)),
     ];
 
+    const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
     useEffect(() => {
         let list = profits;
         if (statusFilter !== "All")
@@ -198,6 +236,7 @@ export default function PlatformProfit() {
             );
         }
         setFiltered(list);
+        setPage(1);
     }, [search, statusFilter, profits]);
 
     return (
@@ -276,11 +315,14 @@ export default function PlatformProfit() {
                     <p>No records match your search.</p>
                 </div>
             ) : (
-                <div className="pp-grid">
-                    {filtered.map((item) => (
-                        <ProfitCard key={item.id} item={item} />
-                    ))}
-                </div>
+                <>
+                    <div className="pp-grid">
+                        {paginated.map((item) => (
+                            <ProfitCard key={item.id} item={item} />
+                        ))}
+                    </div>
+                    <Pagination total={filtered.length} page={page} onPage={setPage} />
+                </>
             )}
         </div>
     );

@@ -5,8 +5,10 @@ const API_BASE = process.env.REACT_APP_API_URL_IMAGE;
 const TOKEN = () => localStorage.getItem("lokal_token");
 
 export default function PaymentReport() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [users, setUsers]           = useState([]);
+  const [loading, setLoading]       = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +30,13 @@ export default function PaymentReport() {
   const totalRevenue  = users.reduce((s, u) => s + parseFloat(u.total_paid    || 0), 0);
   const totalBookings = users.reduce((s, u) => s + parseInt(u.total_bookings  || 0), 0);
   const activeUsers   = users.filter(u => parseInt(u.total_bookings) > 0).length;
+
+  // ── Pagination ──────────────────────────────────────────────────────────────
+  const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE);
+  const paginated  = users.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   return (
     <div>
@@ -77,7 +86,9 @@ export default function PaymentReport() {
         <div className="card-header">
           <div>
             <div className="card-title">Payment Details by Customer</div>
-            <div className="card-subtitle">Individual payment breakdown</div>
+            <div className="card-subtitle">
+              {loading ? "Loading…" : `${users.length} customers · Page ${currentPage} of ${totalPages}`}
+            </div>
           </div>
         </div>
 
@@ -102,12 +113,13 @@ export default function PaymentReport() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((u, i) => {
-                  const paid = parseFloat(u.total_paid    || 0);
-                  const bk   = parseInt(u.total_bookings  || 0);
+                {paginated.map((u, i) => {
+                  const paid = parseFloat(u.total_paid   || 0);
+                  const bk   = parseInt(u.total_bookings || 0);
+                  const serial = (currentPage - 1) * ITEMS_PER_PAGE + i + 1;
                   return (
                     <tr key={u.id}>
-                      <td className="pr-serial">{i + 1}</td>
+                      <td className="pr-serial">{serial}</td>
                       <td>
                         <div className="user-info-cell">
                           <div className="user-avatar-placeholder">
@@ -145,6 +157,37 @@ export default function PaymentReport() {
           )}
         </div>
       </div>
+
+      {/* Pagination */}
+      {!loading && totalPages > 1 && (
+        <div className="bl-pagination">
+          <button
+            className="bl-page-btn"
+            onClick={() => setCurrentPage((p) => p - 1)}
+            disabled={currentPage === 1}
+          >
+            ← Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`bl-page-btn${currentPage === page ? " active" : ""}`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            className="bl-page-btn"
+            onClick={() => setCurrentPage((p) => p + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next →
+          </button>
+        </div>
+      )}
     </div>
   );
 }

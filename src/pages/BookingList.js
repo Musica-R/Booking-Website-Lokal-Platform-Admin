@@ -7,15 +7,15 @@ const TOKEN = () => localStorage.getItem("lokal_token");
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 const STATUS_LABEL = {
-  completed:          "Completed",
-  pending:            "Pending",
-  confirmed:          "Confirmed",
-  cancelled_by_user:  "Cancelled (User)",
-  cancelled_by_vendor:"Cancelled (Vendor)",
+  completed: "Completed",
+  pending: "Pending",
+  confirmed: "Confirmed",
+  cancelled_by_user: "Cancelled (User)",
+  cancelled_by_vendor: "Cancelled (Vendor)",
 };
 
 const PAYMENT_LABEL = {
-  paid:   "Paid",
+  paid: "Paid",
   unpaid: "Unpaid",
 };
 
@@ -81,13 +81,15 @@ function Badge({ value, labelMap = {} }) {
 // ── Main Component ───────────────────────────────────────────────────────────
 
 export default function BookingList() {
-  const [bookings, setBookings]       = useState([]);
-  const [filtered, setFiltered]       = useState([]);
-  const [search, setSearch]           = useState("");
+  const [bookings, setBookings] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState(null);
-  const [refreshing, setRefreshing]   = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchBookings = useCallback(async (isRefresh = false) => {
@@ -108,6 +110,7 @@ export default function BookingList() {
         const list = data.bookings || [];
         setBookings(list);
         setFiltered(list);
+        setCurrentPage(1);
       } else {
         throw new Error(data.message || "Failed to load bookings.");
       }
@@ -134,9 +137,9 @@ export default function BookingList() {
       const q = search.toLowerCase();
       list = list.filter(
         (b) =>
-          b.user_name?.toLowerCase().includes(q)    ||
-          b.vendor_name?.toLowerCase().includes(q)  ||
-          b.shop_name?.toLowerCase().includes(q)    ||
+          b.user_name?.toLowerCase().includes(q) ||
+          b.vendor_name?.toLowerCase().includes(q) ||
+          b.shop_name?.toLowerCase().includes(q) ||
           b.booking_number?.toLowerCase().includes(q) ||
           b.id?.toString().includes(q)
       );
@@ -147,6 +150,14 @@ export default function BookingList() {
 
   // ── Unique statuses for filter tabs ────────────────────────────────────────
   const statuses = ["All", ...new Set(bookings.map((b) => b.booking_status || "pending"))];
+
+
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginated = filtered.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
@@ -159,8 +170,8 @@ export default function BookingList() {
             {loading
               ? "Loading…"
               : error
-              ? "Could not load bookings"
-              : `${filtered.length} of ${bookings.length} bookings`}
+                ? "Could not load bookings"
+                : `${filtered.length} of ${bookings.length} bookings`}
           </p>
         </div>
         <div className="bl-header-right">
@@ -237,7 +248,7 @@ export default function BookingList() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((b, i) => (
+                {paginated.map((b, i) => (
                   <tr key={b.id ?? i}>
                     {/* ID */}
                     <td data-label="ID">
@@ -284,9 +295,9 @@ export default function BookingList() {
                       <div className="bl-payment-row">
                         <Badge value={b.payment_status} labelMap={PAYMENT_LABEL} />
                       </div>
-                    </td> 
+                    </td>
 
-                     <td data-label="Amount">
+                    <td data-label="Amount">
                       <div className="bl-amount-total">{formatINR(b.balance_amount)}</div>
                     </td>
 
@@ -309,6 +320,36 @@ export default function BookingList() {
           )}
         </div>
       </div>
+
+      {!loading && !error && totalPages > 1 && (
+        <div className="bl-pagination">
+          <button
+            className="bl-page-btn"
+            onClick={() => setCurrentPage((p) => p - 1)}
+            disabled={currentPage === 1}
+          >
+            ← Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`bl-page-btn${currentPage === page ? " active" : ""}`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            className="bl-page-btn"
+            onClick={() => setCurrentPage((p) => p + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next →
+          </button>
+        </div>
+      )}
     </div>
   );
 }

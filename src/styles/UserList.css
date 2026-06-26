@@ -36,14 +36,90 @@
 }
 
 /* Stat icon colour variants */
-.ul-icon-users    { background: #EEF3FF; color: #246BFD; }
-.ul-icon-bookings { background: #fffbeb; color: #f59e0b; }
-.ul-icon-revenue  { background: #f5f3ff; color: #7c3aed; }
+.ul-icon-users {
+  background: #EEF3FF;
+  color: #246BFD;
+}
+
+.ul-icon-bookings {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.ul-icon-revenue {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
 
 /* Table cell helpers */
-.ul-serial { color: var(--text-muted); font-weight: 500; }
-.ul-amount { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
-.ul-date   { font-size: 12.5px; color: var(--text-muted); white-space: nowrap; }
+.ul-serial {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.ul-amount {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.ul-date {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 0 8px;
+  flex-wrap: wrap;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.page-btn.active {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-ellipsis {
+  padding: 0 4px;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
 
 /* ── Tablet 1024px ── */
 @media (max-width: 1024px) {

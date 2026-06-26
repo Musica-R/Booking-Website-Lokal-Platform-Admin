@@ -6,6 +6,8 @@ import "../styles/VendorSettlements.css";
 const API_BASE = process.env.REACT_APP_API_URL_IMAGE;
 const TOKEN = () => localStorage.getItem("lokal_token");
 
+const PAGE_SIZE = 10;
+
 const statusLabel = {
   pending: "Pending",
   settled: "Settled",
@@ -24,8 +26,70 @@ const formatDate = (d) => {
 };
 
 /* ══════════════════════════════════════════
-   UpiQrModal — portal-mounted, generates the
-   UPI deep link QR for one settlement row
+   Pagination
+   ══════════════════════════════════════════ */
+function Pagination({ total, page, onPage }) {
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+  if (totalPages <= 1) return null;
+
+  const from = (page - 1) * PAGE_SIZE + 1;
+  const to   = Math.min(page * PAGE_SIZE, total);
+
+  // Build page number array with ellipsis
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== "…") {
+      pages.push("…");
+    }
+  }
+
+  return (
+    <div className="vs-pagination">
+      <span className="vs-pagination-info">
+        Showing {from}–{to} of {total}
+      </span>
+      <div className="vs-pagination-controls">
+        <button
+          className="vs-page-btn"
+          onClick={() => onPage(page - 1)}
+          disabled={page === 1}
+          aria-label="Previous page"
+        >
+          ‹
+        </button>
+
+        {pages.map((p, i) =>
+          p === "…" ? (
+            <span key={`ellipsis-${i}`} className="vs-page-ellipsis">…</span>
+          ) : (
+            <button
+              key={p}
+              className={`vs-page-btn${p === page ? " active" : ""}`}
+              onClick={() => onPage(p)}
+              aria-current={p === page ? "page" : undefined}
+            >
+              {p}
+            </button>
+          )
+        )}
+
+        <button
+          className="vs-page-btn"
+          onClick={() => onPage(page + 1)}
+          disabled={page === totalPages}
+          aria-label="Next page"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════
+   UpiQrModal
    ══════════════════════════════════════════ */
 function UpiQrModal({ settlement, onClose }) {
   useEffect(() => {
@@ -39,7 +103,7 @@ function UpiQrModal({ settlement, onClose }) {
   }, [onClose]);
 
   const amount = parseFloat(settlement.vendor_amount || 0).toFixed(2);
-  const note = `Settlement ${settlement.booking_number}`;
+  const note   = `Settlement ${settlement.booking_number}`;
   const upiUri =
     `upi://pay?pa=${encodeURIComponent(settlement.upi_id)}` +
     `&pn=${encodeURIComponent(settlement.vendor_name)}` +
@@ -49,14 +113,11 @@ function UpiQrModal({ settlement, onClose }) {
     <div className="vs-qr-overlay" onMouseDown={onClose}>
       <div className="vs-qr-modal" onMouseDown={(e) => e.stopPropagation()}>
         <button className="vs-qr-close" onClick={onClose} aria-label="Close">&#x2715;</button>
-
         <div className="vs-qr-vendor">{settlement.vendor_name}</div>
         <div className="vs-qr-shop">{settlement.shop_name}</div>
-
         <div className="vs-qr-code-wrap">
           <QRCodeSVG value={upiUri} size={220} level="M" includeMargin />
         </div>
-
         <div className="vs-qr-amount">{formatCurrency(settlement.vendor_amount)}</div>
         <div className="vs-qr-upi">{settlement.upi_id}</div>
         <div className="vs-qr-hint">Scan with any UPI app to pay</div>
@@ -121,8 +182,10 @@ function SettlementCard({ s, onShowQr }) {
           <span className="vs-amount-value">{formatCurrency(s.total_received)}</span>
         </div>
         <div className="vs-amount-item">
-          <span className="vs-amount-label">Platform Processing Fee ({parseFloat(s.platform_commission_percent)}%)</span>
-          <span className="vs-amount-value ">{formatCurrency(s.platform_commission_amount)}</span>
+          <span className="vs-amount-label">
+            Platform Processing Fee ({parseFloat(s.platform_commission_percent)}%)
+          </span>
+          <span className="vs-amount-value">{formatCurrency(s.platform_commission_amount)}</span>
         </div>
       </div>
 
@@ -151,17 +214,18 @@ function SettlementCard({ s, onShowQr }) {
    VendorSettlements — main export
    ══════════════════════════════════════════ */
 export default function VendorSettlements() {
-  const [settlements, setSettlements] = useState([]);
-  const [filtered, setFiltered]       = useState([]);
-  const [search, setSearch]           = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
-  const [loading, setLoading]         = useState(true);
-  const [qrSettlement, setQrSettlement] = useState(null);
+  const [settlements, setSettlements]     = useState([]);
+  const [filtered, setFiltered]           = useState([]);
+  const [search, setSearch]               = useState("");
+  const [statusFilter, setStatusFilter]   = useState("All");
+  const [loading, setLoading]             = useState(true);
+  const [qrSettlement, setQrSettlement]   = useState(null);
+  const [page, setPage]                   = useState(1);
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/vendors/admin/vendor-settlements`, {
+        const res  = await fetch(`${API_BASE}/api/vendors/admin/vendor-settlements`, {
           headers: { Authorization: `Bearer ${TOKEN()}` },
         });
         const data = await res.json();
@@ -179,6 +243,7 @@ export default function VendorSettlements() {
 
   const statuses = ["All", ...new Set(settlements.map((s) => s.settlement_status))];
 
+  // Reset to page 1 whenever filters change
   useEffect(() => {
     let list = settlements;
     if (statusFilter !== "All") list = list.filter((s) => s.settlement_status === statusFilter);
@@ -193,7 +258,11 @@ export default function VendorSettlements() {
       );
     }
     setFiltered(list);
+    setPage(1);
   }, [search, statusFilter, settlements]);
+
+  // Slice for current page
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div>
@@ -229,11 +298,15 @@ export default function VendorSettlements() {
       ) : filtered.length === 0 ? (
         <div className="vs-empty"><span>🔍</span><p>No settlements match your search.</p></div>
       ) : (
-        <div className="vs-grid">
-          {filtered.map((s) => (
-            <SettlementCard key={s.settlement_id} s={s} onShowQr={setQrSettlement} />
-          ))}
-        </div>
+        <>
+          <div className="vs-grid">
+            {paginated.map((s) => (
+              <SettlementCard key={s.settlement_id} s={s} onShowQr={setQrSettlement} />
+            ))}
+          </div>
+
+          <Pagination total={filtered.length} page={page} onPage={setPage} />
+        </>
       )}
 
       {qrSettlement && (

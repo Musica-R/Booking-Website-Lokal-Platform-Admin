@@ -90,10 +90,10 @@ function DocThumb({ src, label, onClick }) {
    ══════════════════════════════════════════ */
 function VendorCard({ v }) {
   const [avatarError, setAvatarError] = useState(false);
-  const [lightbox, setLightbox]       = useState(null); // { src, caption } | null
+  const [lightbox, setLightbox] = useState(null); // { src, caption } | null
   // const theme = getTheme(v.category_name);
 
-  const openLightbox  = useCallback((src, caption) => setLightbox({ src, caption }), []);
+  const openLightbox = useCallback((src, caption) => setLightbox({ src, caption }), []);
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
   return (
@@ -129,7 +129,7 @@ function VendorCard({ v }) {
 
           <span
             className="vl-category-badge"
-            
+
           >
             {v.category_name}
           </span>
@@ -176,6 +176,15 @@ function VendorCard({ v }) {
                 {[v.address1, v.address2].filter(Boolean).join(", ") || "—"}
               </span>
             </div>
+
+
+            <div className="vl-info-item">
+              <span className="vl-info-label">📅 Joined Date</span>
+              <span className="vl-info-value vl-info-value--sm">
+                {v.created_at ? new Date(v.created_at).toLocaleDateString("en-GB") : "—"}
+              </span>
+            </div>
+
           </div>
 
           {/* Availability + Rating */}
@@ -229,16 +238,19 @@ function VendorCard({ v }) {
    VendorList — main export
    ══════════════════════════════════════════ */
 export default function VendorList() {
-  const [vendors,        setVendors]        = useState([]);
-  const [filtered,       setFiltered]       = useState([]);
-  const [search,         setSearch]         = useState("");
-  const [loading,        setLoading]        = useState(true);
+  const [vendors, setVendors] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState("All");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 6;
 
   useEffect(() => {
     (async () => {
       try {
-        const res  = await fetch(`${API_BASE}/api/vendors/list-vendors`, {
+        const res = await fetch(`${API_BASE}/api/vendors/list-vendors`, {
           headers: { Authorization: `Bearer ${TOKEN()}` },
         });
         const data = await res.json();
@@ -272,6 +284,32 @@ export default function VendorList() {
     }
     setFiltered(list);
   }, [search, categoryFilter, vendors]);
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginated = filtered.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+
+  useEffect(() => {
+    let list = vendors;
+    if (categoryFilter !== "All")
+      list = list.filter((v) => v.category_name === categoryFilter);
+    if (search) {
+      const q = search.toLowerCase();
+      list = list.filter(
+        (v) =>
+          v.full_name.toLowerCase().includes(q) ||
+          v.shop_name?.toLowerCase().includes(q) ||
+          v.category_name.toLowerCase().includes(q) ||
+          v.city?.toLowerCase().includes(q)
+      );
+    }
+    setFiltered(list);
+    setCurrentPage(1); // ← reset to page 1 on every filter change
+  }, [search, categoryFilter, vendors]);
+
 
   return (
     <div>
@@ -311,7 +349,36 @@ export default function VendorList() {
         <div className="vl-empty"><span>🔍</span><p>No vendors match your search.</p></div>
       ) : (
         <div className="vl-grid">
-          {filtered.map((v) => <VendorCard key={v.id} v={v} />)}
+          {paginated.map((v) => <VendorCard key={v.id} v={v} />)}
+        </div>
+      )}
+      {totalPages > 1 && (
+        <div className="vl-pagination">
+          <button
+            className="vl-page-btn"
+            onClick={() => setCurrentPage((p) => p - 1)}
+            disabled={currentPage === 1}
+          >
+            ← Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`vl-page-btn${currentPage === page ? " active" : ""}`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            className="vl-page-btn"
+            onClick={() => setCurrentPage((p) => p + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next →
+          </button>
         </div>
       )}
     </div>
