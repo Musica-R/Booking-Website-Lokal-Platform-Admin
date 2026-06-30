@@ -9,9 +9,10 @@ const navItems = [
   { to: "/users", icon: "👥", label: "User List" },
   { to: "/bookings", icon: "📅", label: "Booking List" },
   { to: "/payment-report", icon: "💳", label: "Payment Report" },
-  { to: "/vendor-settlement", icon: "🤝", label: "Vendor Settlement" },
-  { to: "/earn", icon: "💰", label: "Cancellation Earnings" },
-  { to: "/wall", icon: "👛", label: "Wallet Refunds" },
+  { to: "/vendor-settlement", icon: "🤝", label: "HS Vendor Settlement" },
+  { to: "/earn", icon: "💰", label: "HS Cancellation Earnings" },
+  { to: "/wall", icon: "👛", label: "HS Wallet Refunds" },
+  { to: "/act-settlement", icon: "🤝", label: "Activity Settlement" },
 ];
 
 export default function Sidebar({ isOpen, isMobileOpen, onMobileClose }) {

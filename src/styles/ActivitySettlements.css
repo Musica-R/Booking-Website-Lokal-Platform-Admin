@@ -1,9 +1,9 @@
 /* =====================================================================
-   VendorSettlements.css
-   Breakpoints: 1024px | 768px | 420px — prefixed vs- to avoid conflicts
+   ActivitySettlements.css
+   Breakpoints: 1024px | 768px | 420px — prefixed as- to avoid conflicts
    ===================================================================== */
 
-.vs-header {
+.as-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -12,20 +12,20 @@
     margin-bottom: 24px;
 }
 
-.vs-header h1 {
+.as-header h1 {
     font-size: 22px;
     font-weight: 700;
     color: var(--text-primary, #1a1a2e);
     margin: 0 0 4px;
 }
 
-.vs-header p {
+.as-header p {
     font-size: 13px;
     color: var(--text-muted, #888);
     margin: 0;
 }
 
-.vs-search-bar {
+.as-search-bar {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -37,7 +37,7 @@
     max-width: 360px;
 }
 
-.vs-search-bar input {
+.as-search-bar input {
     border: none;
     outline: none;
     background: transparent;
@@ -46,18 +46,18 @@
     width: 100%;
 }
 
-.vs-search-bar input::placeholder {
+.as-search-bar input::placeholder {
     color: var(--text-muted, #bbb);
 }
 
-.vs-filters {
+.as-filters {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
-.vs-chip {
+.as-chip {
     padding: 5px 14px;
     border-radius: 20px;
     font-size: 12.5px;
@@ -70,25 +70,25 @@
     white-space: nowrap;
 }
 
-.vs-chip:hover {
+.as-chip:hover {
     border-color: var(--primary, #6366f1);
     color: var(--primary, #6366f1);
 }
 
-.vs-chip.active {
+.as-chip.active {
     background: var(--primary, #6366f1);
     border-color: var(--primary, #6366f1);
     color: #fff;
 }
 
-.vs-grid {
+.as-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     align-items: start;
 }
 
-.vs-card {
+.as-card {
     background: var(--surface, #fff);
     border: 1px solid var(--border, #e8eaed);
     border-radius: 16px;
@@ -96,19 +96,19 @@
     transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.vs-card:hover {
+.as-card:hover {
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
 }
 
-.vs-card-header {
+.as-card-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 10px;
 }
 
-.vs-avatar {
+.as-avatar {
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -122,23 +122,23 @@
     flex-shrink: 0;
 }
 
-.vs-header-text {
+.as-header-text {
     flex: 1;
     min-width: 0;
 }
 
-.vs-vendor-name {
+.as-vendor-name {
     font-size: 15px;
     font-weight: 700;
     color: var(--text-primary, #1a1a2e);
 }
 
-.vs-shop-name {
+.as-shop-name {
     font-size: 12px;
     color: var(--text-muted, #888);
 }
 
-.vs-status-badge {
+.as-status-badge {
     padding: 4px 11px;
     border-radius: 20px;
     font-size: 11px;
@@ -146,36 +146,36 @@
     white-space: nowrap;
 }
 
-.vs-status-badge--pending {
+.as-status-badge--pending {
     background: #fef3c7;
     color: #b45309;
 }
 
-.vs-status-badge--settled {
+.as-status-badge--settled {
     background: #d1fae5;
     color: #065f46;
 }
 
-.vs-status-badge--on_hold {
+.as-status-badge--on_hold {
     background: #fee2e2;
     color: #b91c1c;
 }
 
-.vs-booking-row {
+.as-booking-row {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
-.vs-booking-number {
+.as-booking-number {
     font-size: 12.5px;
     font-weight: 600;
     color: var(--text-secondary, #444);
 }
 
-.vs-mini-badge {
+.as-mini-badge {
     padding: 2px 9px;
     border-radius: 12px;
     font-size: 10.5px;
@@ -185,36 +185,45 @@
     color: #4338ca;
 }
 
-.vs-mini-badge--paid,
-.vs-mini-badge--completed {
+.as-mini-badge--paid,
+.as-mini-badge--completed {
     background: #d1fae5;
     color: #065f46;
 }
 
-.vs-mini-badge--pending {
+.as-mini-badge--pending {
     background: #fef3c7;
     color: #b45309;
 }
 
-.vs-divider {
+.as-activity-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 11.5px;
+    color: var(--text-muted, #777);
+    margin-bottom: 10px;
+}
+
+.as-divider {
     border: none;
     border-top: 1px solid var(--border, #f0f2f5);
     margin: 12px 0;
 }
 
-.vs-amount-grid {
+.as-amount-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 9px 14px;
 }
 
-.vs-amount-item {
+.as-amount-item {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.vs-amount-label {
+.as-amount-label {
     font-size: 10.5px;
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -222,17 +231,17 @@
     font-weight: 700;
 }
 
-.vs-amount-value {
+.as-amount-value {
     font-size: 13px;
     color: var(--text-secondary, #444);
     font-weight: 600;
 }
 
-.vs-amount-value--neg {
+.as-amount-value--neg {
     color: #dc2626;
 }
 
-.vs-payout-row {
+.as-payout-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -243,19 +252,19 @@
     margin-bottom: 12px;
 }
 
-.vs-payout-label {
+.as-payout-label {
     font-size: 12.5px;
     font-weight: 600;
     color: #166534;
 }
 
-.vs-payout-amount {
+.as-payout-amount {
     font-size: 17px;
     font-weight: 800;
     color: #166534;
 }
 
-.vs-upi-chip {
+.as-upi-chip {
     width: 100%;
     display: flex;
     align-items: center;
@@ -264,21 +273,19 @@
     border: 1.5px dashed #c7d2fe;
     border-radius: 10px;
     padding: 9px 12px;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
     margin-bottom: 10px;
 }
 
-.vs-upi-chip:hover {
-    background: #e0e7ff;
-    border-color: var(--primary, #6366f1);
+.as-upi-chip--empty {
+    background: #f9fafb;
+    border-color: #e5e7eb;
 }
 
-.vs-upi-icon {
+.as-upi-icon {
     font-size: 15px;
 }
 
-.vs-upi-id {
+.as-upi-id {
     flex: 1;
     text-align: left;
     font-size: 13px;
@@ -289,22 +296,31 @@
     white-space: nowrap;
 }
 
-.vs-upi-action {
-    font-size: 11.5px;
+.as-upi-chip--empty .as-upi-id {
+    color: var(--text-muted, #999);
+    font-style: italic;
+    font-weight: 500;
+}
+
+.as-upi-action {
+    font-size: 11px;
     font-weight: 700;
-    color: var(--primary, #6366f1);
+    color: #b45309;
+    background: #fef3c7;
+    padding: 2px 8px;
+    border-radius: 10px;
     white-space: nowrap;
 }
 
-.vs-dates-row {
+.as-dates-row {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
     color: var(--text-muted, #aaa);
 }
 
-.vs-loading,
-.vs-empty {
+.as-loading,
+.as-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -315,124 +331,13 @@
     font-size: 14px;
 }
 
-.vs-loading span,
-.vs-empty span {
+.as-loading span,
+.as-empty span {
     font-size: 36px;
 }
 
-/* ── QR Modal ── */
-.vs-qr-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.82);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-    padding: 20px;
-    animation: vs-fadeIn 0.15s ease;
-}
-
-@keyframes vs-fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.vs-qr-modal {
-    position: relative;
-    width: 100%;
-    max-width: 340px;
-    background: #fff;
-    border-radius: 18px;
-    padding: 28px 24px 24px;
-    text-align: center;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-    animation: vs-slideUp 0.18s ease;
-}
-
-@keyframes vs-slideUp {
-    from {
-        transform: translateY(14px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.vs-qr-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: none;
-    background: #f3f4f6;
-    color: #555;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s;
-}
-
-.vs-qr-close:hover {
-    background: #e5e7eb;
-}
-
-.vs-qr-vendor {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary, #1a1a2e);
-    margin-bottom: 2px;
-}
-
-.vs-qr-shop {
-    font-size: 12.5px;
-    color: var(--text-muted, #888);
-    margin-bottom: 18px;
-}
-
-.vs-qr-code-wrap {
-    display: inline-flex;
-    padding: 14px;
-    background: #fff;
-    border: 1px solid var(--border, #e8eaed);
-    border-radius: 14px;
-    margin-bottom: 16px;
-}
-
-.vs-qr-amount {
-    font-size: 22px;
-    font-weight: 800;
-    color: #166534;
-    margin-bottom: 4px;
-}
-
-.vs-qr-upi {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text-secondary, #555);
-    margin-bottom: 8px;
-    word-break: break-all;
-}
-
-.vs-qr-hint {
-    font-size: 11.5px;
-    color: var(--text-muted, #aaa);
-}
-
 /* ── Pagination ── */
-.vs-pagination {
+.as-pagination {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -441,18 +346,18 @@
   flex-wrap: wrap;
 }
 
-.vs-pagination-info {
+.as-pagination-info {
   font-size: 13px;
   color: #888;
 }
 
-.vs-pagination-controls {
+.as-pagination-controls {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.vs-page-btn {
+.as-page-btn {
   min-width: 36px;
   height: 36px;
   padding: 0 10px;
@@ -465,13 +370,13 @@
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.vs-page-btn:hover:not(:disabled):not(.active) {
+.as-page-btn:hover:not(:disabled):not(.active) {
   background: #2a2a3a;
   border-color: #c9a84c44;
   color: #fff;
 }
 
-.vs-page-btn.active {
+.as-page-btn.active {
   background: #c9a84c;
   border-color: #c9a84c;
   color: #1a1a1a;
@@ -479,19 +384,20 @@
   cursor: default;
 }
 
-.vs-page-btn:disabled {
+.as-page-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
-.vs-page-ellipsis {
+.as-page-ellipsis {
   color: #555;
   padding: 0 4px;
   font-size: 14px;
   user-select: none;
 }
+
 /* Mark as Paid button */
-.vs-mark-paid-btn {
+.as-mark-paid-btn {
   width: 100%;
   margin-top: 10px;
   padding: 10px 14px;
@@ -509,28 +415,35 @@
   transition: background 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
 }
 
-.vs-mark-paid-btn:hover:not(:disabled) {
+.as-mark-paid-btn:hover:not(:disabled) {
   background: #dcfce7;
 }
 
-.vs-mark-paid-btn:active:not(:disabled) {
+.as-mark-paid-btn:active:not(:disabled) {
   transform: scale(0.98);
 }
 
-.vs-mark-paid-btn:disabled {
+.as-mark-paid-btn:disabled {
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
-/* When already paid (✓ Paid) */
-.vs-mark-paid-btn:disabled:not(.vs-mark-paid-btn--loading) {
+/* Already paid */
+.as-mark-paid-btn--done {
   background: #f1f5f9;
   border-color: #cbd5e1;
   color: #64748b;
 }
 
-/* Error banner shown above filters */
-.vs-error-banner {
+/* Request in flight */
+.as-mark-paid-btn--loading {
+  background: #fef9c3;
+  border-color: #eab308;
+  color: #854d0e;
+}
+
+/* Error banner */
+.as-error-banner {
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #b91c1c;
@@ -539,64 +452,56 @@
   font-size: 13px;
   margin: 12px 0;
 }
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-    .vs-grid {
+    .as-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    .vs-search-bar {
+    .as-search-bar {
         min-width: 240px;
     }
 
-    .vs-header h1 {
+    .as-header h1 {
         font-size: 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .vs-header {
+    .as-header {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
     }
 
-    .vs-search-bar {
+    .as-search-bar {
         min-width: unset;
         max-width: 100%;
     }
 }
 
 @media (max-width: 420px) {
-    .vs-header h1 {
+    .as-header h1 {
         font-size: 18px;
     }
 
-    .vs-header p {
+    .as-header p {
         font-size: 12px;
     }
 
-    .vs-card {
+    .as-card {
         padding: 14px;
         border-radius: 12px;
     }
 
-    .vs-amount-grid {
+    .as-amount-grid {
         grid-template-columns: 1fr;
         gap: 7px;
     }
 
-    .vs-payout-amount {
+    .as-payout-amount {
         font-size: 16px;
-    }
-
-    .vs-qr-modal {
-        padding: 22px 16px 18px;
-    }
-
-    .vs-qr-code-wrap svg {
-        width: 180px !important;
-        height: 180px !important;
     }
 }

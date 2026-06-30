@@ -14,6 +14,7 @@ import PlatformProfit from "./pages/PlatformProfit";
 import UserWallet from "./pages/UserWallet";
 import ActivityBookingList from "./pages/ActivityBookingList";
 import NearbyStallList from "./pages/NearbyStallList";
+import ActivitySettlements from "./pages/ActivitySettlements";
 
 function AdminLayout({ children, adminName, onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -100,6 +101,7 @@ export default function App() {
           <Route path="/bookings" element={<BookingList />} />
           <Route path="/payment-report" element={<PaymentReport />} />
           <Route path="/vendor-settlement" element={<VendorSettlement />} />
+          <Route path="/act-settlement" element={<ActivitySettlements  />} />
           <Route path="/earn" element={<PlatformProfit />} />
           <Route path="/wall" element={<UserWallet />} />
         </Routes>

@@ -12,6 +12,7 @@ const statusLabel = {
   pending: "Pending",
   settled: "Settled",
   on_hold: "On Hold",
+  paid: "Paid",
 };
 
 const formatCurrency = (val) => {
@@ -35,7 +36,6 @@ function Pagination({ total, page, onPage }) {
   const from = (page - 1) * PAGE_SIZE + 1;
   const to   = Math.min(page * PAGE_SIZE, total);
 
-  // Build page number array with ellipsis
   const pages = [];
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
@@ -130,7 +130,10 @@ function UpiQrModal({ settlement, onClose }) {
 /* ══════════════════════════════════════════
    SettlementCard
    ══════════════════════════════════════════ */
-function SettlementCard({ s, onShowQr }) {
+function SettlementCard({ s, onShowQr, onMarkPaid, payingId }) {
+  const isPaid = s.settlement_status === "paid";
+  const isPaying = payingId === s.booking_id;
+
   return (
     <div className="vs-card">
       <div className="vs-card-header">
@@ -202,6 +205,15 @@ function SettlementCard({ s, onShowQr }) {
         <span className="vs-upi-action">Show QR →</span>
       </button>
 
+      <button
+        className="vs-mark-paid-btn"
+        onClick={() => onMarkPaid(s.booking_id)}
+        disabled={isPaid || isPaying}
+        title={isPaid ? "Already marked as paid" : "Mark this settlement as paid"}
+      >
+        {isPaid ? "✓ Paid" : isPaying ? "Updating…" : "Mark as Paid"}
+      </button>
+
       <div className="vs-dates-row">
         <span>Created: {formatDate(s.created_at)}</span>
         {s.settled_at && <span>Settled: {formatDate(s.settled_at)}</span>}
@@ -221,6 +233,8 @@ export default function VendorSettlements() {
   const [loading, setLoading]             = useState(true);
   const [qrSettlement, setQrSettlement]   = useState(null);
   const [page, setPage]                   = useState(1);
+  const [payingId, setPayingId]           = useState(null);
+  const [payError, setPayError]           = useState("");
 
   useEffect(() => {
     (async () => {
@@ -243,7 +257,6 @@ export default function VendorSettlements() {
 
   const statuses = ["All", ...new Set(settlements.map((s) => s.settlement_status))];
 
-  // Reset to page 1 whenever filters change
   useEffect(() => {
     let list = settlements;
     if (statusFilter !== "All") list = list.filter((s) => s.settlement_status === statusFilter);
@@ -261,8 +274,44 @@ export default function VendorSettlements() {
     setPage(1);
   }, [search, statusFilter, settlements]);
 
-  // Slice for current page
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const handleMarkPaid = async (bookingId) => {
+    setPayError("");
+    setPayingId(bookingId);
+    try {
+      const res = await fetch(
+        `${API_BASE}/api/vendors/vendor-settlement/pay/${bookingId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TOKEN()}`,
+          },
+          body: JSON.stringify({ settlement_status: "paid" }),
+        }
+      );
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to update settlement status");
+      }
+
+      // Update local state so the UI reflects the change immediately
+      setSettlements((prev) =>
+        prev.map((s) =>
+          s.booking_id === bookingId
+            ? { ...s, settlement_status: "paid", ...(data.data || {}) }
+            : s
+        )
+      );
+    } catch (e) {
+      console.error(e);
+      setPayError(e.message || "Something went wrong while marking as paid.");
+    } finally {
+      setPayingId(null);
+    }
+  };
 
   return (
     <div>
@@ -280,6 +329,8 @@ export default function VendorSettlements() {
           />
         </div>
       </div>
+
+      {payError && <div className="vs-error-banner">{payError}</div>}
 
       <div className="vs-filters">
         {statuses.map((st) => (
@@ -301,7 +352,13 @@ export default function VendorSettlements() {
         <>
           <div className="vs-grid">
             {paginated.map((s) => (
-              <SettlementCard key={s.settlement_id} s={s} onShowQr={setQrSettlement} />
+              <SettlementCard
+                key={s.settlement_id}
+                s={s}
+                onShowQr={setQrSettlement}
+                onMarkPaid={handleMarkPaid}
+                payingId={payingId}
+              />
             ))}
           </div>
 
