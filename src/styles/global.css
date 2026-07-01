@@ -101,6 +101,64 @@ body {
   flex-shrink: 0;
 }
 
+/* ========== SIDEBAR GROUPS / ACCORDION ========== */
+.nav-group {
+  margin-bottom: 4px;
+}
+
+.nav-group:first-child .sidebar-section-title {
+  padding-top: 12px;
+}
+
+.sidebar-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: inherit;
+}
+
+.section-caret {
+  font-size: 10px;
+  color: #475569;
+  transition: transform 0.22s ease;
+  transform: rotate(0deg);
+  padding-right: 20px;
+}
+
+.section-caret.expanded {
+  transform: rotate(90deg);
+}
+
+/* Smooth collapse without layout jump.
+   Only ONE child (.nav-group-items-inner) lives in this grid,
+   so the whole group collapses together — not just the first item. */
+.nav-group-items {
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.nav-group-items.collapsed {
+  grid-template-rows: 0fr;
+}
+
+.nav-group-items-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sidebar-section-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 14px 16px 8px;
+}
+
 .logo-icon {
   width: 36px;
   height: 36px;

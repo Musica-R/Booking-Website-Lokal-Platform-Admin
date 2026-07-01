@@ -15,6 +15,7 @@ import UserWallet from "./pages/UserWallet";
 import ActivityBookingList from "./pages/ActivityBookingList";
 import NearbyStallList from "./pages/NearbyStallList";
 import ActivitySettlements from "./pages/ActivitySettlements";
+import NearbyStallProfit from "./pages/NearbyStallProfit";
 
 function AdminLayout({ children, adminName, onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -104,6 +105,7 @@ export default function App() {
           <Route path="/act-settlement" element={<ActivitySettlements  />} />
           <Route path="/earn" element={<PlatformProfit />} />
           <Route path="/wall" element={<UserWallet />} />
+           <Route path="/near-profit" element={<NearbyStallProfit />} />
         </Routes>
       </AdminLayout>
     </Router>

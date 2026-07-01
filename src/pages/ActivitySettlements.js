@@ -159,12 +159,14 @@ function SettlementCard({ s, onMarkPaid, payingId }) {
           <span className="as-amount-label">Total Received</span>
           <span className="as-amount-value">{formatCurrency(s.total_received)}</span>
         </div>
+        
         <div className="as-amount-item">
           <span className="as-amount-label">
             Platform Fee ({parseFloat(s.platform_commission_percent || 0)}%)
           </span>
           <span className="as-amount-value">{formatCurrency(s.platform_commission_amount)}</span>
         </div>
+
       </div>
 
       <hr className="as-divider" />
