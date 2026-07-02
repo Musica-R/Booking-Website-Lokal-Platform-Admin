@@ -1,0 +1,313 @@
+/* ========== PLATFORM PROFIT DASHBOARD ========== */
+
+.profit-dashboard {
+  padding: 4px 0 24px;
+}
+
+/* ── Page Header ── */
+.profit-page-header {
+  margin-bottom: 20px;
+}
+
+.profit-page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.profit-page-subtitle {
+  font-size: 13.5px;
+  color: var(--text-muted, #64748b);
+  margin-top: 4px;
+}
+
+/* ── Loading / Error ── */
+.profit-loading-state,
+.profit-error-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 64px 0;
+  color: var(--text-muted, #64748b);
+  font-size: 14px;
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  border-radius: 14px;
+}
+
+.profit-error-state {
+  color: #B42318;
+  background: #FEF3F2;
+  border-color: #FEE4E2;
+}
+
+.profit-spinner {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2.5px solid #e2e6f5;
+  border-top-color: #246BFD;
+  animation: profit-spin 0.7s linear infinite;
+}
+
+@keyframes profit-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Hero Card ── */
+.profit-hero-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #246BFD;
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin-bottom: 20px;
+}
+
+.profit-hero-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profit-hero-value {
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 6px;
+  letter-spacing: -0.5px;
+}
+
+.profit-hero-note {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 6px;
+}
+
+.profit-hero-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* ── Breakdown Grid ── */
+.profit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.profit-card {
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.profit-card:hover {
+  border-color: #e1e5ee;
+  box-shadow: 0 4px 14px -8px rgba(15, 23, 42, 0.18);
+}
+
+.profit-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.profit-card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #246BFD;
+  background: #EEF3FF;
+}
+
+.profit-card-percent {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary, #475569);
+}
+
+.profit-card-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.profit-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  margin-top: 4px;
+}
+
+.profit-card-desc {
+  font-size: 11.5px;
+  color: var(--text-muted, #64748b);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.profit-card-bar-track {
+  width: 100%;
+  height: 5px;
+  background: #f1f3f8;
+  border-radius: 4px;
+  margin-top: 14px;
+  overflow: hidden;
+}
+
+.profit-card-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: #246BFD;
+  transition: width 0.4s ease;
+}
+
+/* ── Distribution Card ── */
+.profit-distribution-card {
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.profit-distribution-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+.profit-distribution-subtitle {
+  font-size: 12px;
+  color: var(--text-muted, #64748b);
+  margin-top: 2px;
+}
+
+.profit-distribution-bar {
+  display: flex;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 16px 0 18px;
+  background: #f1f3f8;
+}
+
+.profit-distribution-segment {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.profit-distribution-legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+}
+
+.profit-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+}
+
+.profit-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.profit-legend-label {
+  color: var(--text-secondary, #475569);
+  flex: 1;
+}
+
+.profit-legend-value {
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+/* ── Tablet 1024px ── */
+@media (max-width: 1024px) {
+  .profit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profit-hero-value {
+    font-size: 29px;
+  }
+}
+
+/* ── Mobile 767px ── */
+@media (max-width: 767px) {
+  .profit-hero-card {
+    padding: 22px 20px;
+  }
+
+  .profit-hero-value {
+    font-size: 25px;
+  }
+
+  .profit-hero-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .profit-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .profit-card {
+    padding: 14px;
+  }
+
+  .profit-card-value {
+    font-size: 17px;
+  }
+
+  .profit-distribution-legend {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Extra small 480px ── */
+@media (max-width: 480px) {
+  .profit-hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .profit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profit-page-title {
+    font-size: 19px;
+  }
+}

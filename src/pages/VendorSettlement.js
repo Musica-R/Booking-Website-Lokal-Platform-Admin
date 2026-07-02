@@ -34,7 +34,7 @@ function Pagination({ total, page, onPage }) {
   if (totalPages <= 1) return null;
 
   const from = (page - 1) * PAGE_SIZE + 1;
-  const to   = Math.min(page * PAGE_SIZE, total);
+  const to = Math.min(page * PAGE_SIZE, total);
 
   const pages = [];
   for (let i = 1; i <= totalPages; i++) {
@@ -103,7 +103,7 @@ function UpiQrModal({ settlement, onClose }) {
   }, [onClose]);
 
   const amount = parseFloat(settlement.vendor_amount || 0).toFixed(2);
-  const note   = `Settlement ${settlement.booking_number}`;
+  const note = `Settlement ${settlement.booking_number}`;
   const upiUri =
     `upi://pay?pa=${encodeURIComponent(settlement.upi_id)}` +
     `&pn=${encodeURIComponent(settlement.vendor_name)}` +
@@ -156,9 +156,17 @@ function SettlementCard({ s, onShowQr, onMarkPaid, payingId }) {
       <hr className="vs-divider" />
 
       <div className="vs-amount-grid">
-        <div className="vs-amount-item">
+        {/* <div className="vs-amount-item">
           <span className="vs-amount-label">Advance Paid</span>
           <span className="vs-amount-value">{formatCurrency(s.advance_paid)}</span>
+        </div> */}
+        <div className="vs-amount-item">
+          <span className="vs-amount-label">Advance Paid</span>
+          <span className="vs-amount-value">
+            {!Number(s.advance_paid)
+              ? "Used Wallet"
+              : formatCurrency(s.advance_paid)}
+          </span>
         </div>
         <div className="vs-amount-item">
           <span className="vs-amount-label">Balance Paid</span>
@@ -226,20 +234,20 @@ function SettlementCard({ s, onShowQr, onMarkPaid, payingId }) {
    VendorSettlements — main export
    ══════════════════════════════════════════ */
 export default function VendorSettlements() {
-  const [settlements, setSettlements]     = useState([]);
-  const [filtered, setFiltered]           = useState([]);
-  const [search, setSearch]               = useState("");
-  const [statusFilter, setStatusFilter]   = useState("All");
-  const [loading, setLoading]             = useState(true);
-  const [qrSettlement, setQrSettlement]   = useState(null);
-  const [page, setPage]                   = useState(1);
-  const [payingId, setPayingId]           = useState(null);
-  const [payError, setPayError]           = useState("");
+  const [settlements, setSettlements] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const [qrSettlement, setQrSettlement] = useState(null);
+  const [page, setPage] = useState(1);
+  const [payingId, setPayingId] = useState(null);
+  const [payError, setPayError] = useState("");
 
   useEffect(() => {
     (async () => {
       try {
-        const res  = await fetch(`${API_BASE}/api/vendors/admin/vendor-settlements`, {
+        const res = await fetch(`${API_BASE}/api/vendors/admin/vendor-settlements`, {
           headers: { Authorization: `Bearer ${TOKEN()}` },
         });
         const data = await res.json();

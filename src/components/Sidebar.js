@@ -15,7 +15,7 @@ const navGroups = [
     title: "Settlements",
     items: [
       { to: "/vendor-settlement", icon: "🤝", label: "Services Settlements" },
-      { to: "/act-settlement", icon: "🤝", label: "Activity Settlements" },
+      { to: "/act-settlement", icon: "✔️", label: "Activity Settlements" },
     ],
   },
 
@@ -23,31 +23,38 @@ const navGroups = [
     key: "profit",
     title: "Revenue",
     items: [
-      { to: "/earn", icon: "💰", label: "HS User Cancellation Profit" },
-      { to: "/near-profit", icon: "💹", label: "Stall Profits" },
+      { to: "/profit", icon: "💰", label: "Overall Earnings Dashboard" },
+      { to: "/earn", icon: "💵", label: "HS User Cancellation Profit" },
+      { to: "/near-profit", icon: "💶", label: "Stall Profits" },
     ],
   },
 
   {
     key: "list",
-    title: "Records",
+    title: "Registered Records",
     items: [
       { to: "/vendors", icon: "🔧", label: "Home Service Vendors" },
       { to: "/activity", icon: "🎮", label: "Activity Vendors" },
       { to: "/near", icon: "🛒", label: "Nearby Stalls" },
       { to: "/users", icon: "👥", label: "Users" },
-      { to: "/bookings", icon: "📅", label: "Bookings" },
-      { to: "/payment-report", icon: "💳", label: "Payments" },
+      // { to: "/payment-report", icon: "💳", label: "Payments" },
     ],
   },
 
-
+  {
+    key: "book",
+    title: "Booking Records",
+    items: [
+      { to: "/bookings", icon: "📅", label: "Service Bookings" },
+      { to: "/act-book", icon: "✍️", label: "Activity Bookings" },
+    ],
+  },
 
   {
     key: "userwallet",
     title: "Wallet",
     items: [
-      { to: "/wall", icon: "👛", label: "Wallet Refunds" },
+      { to: "/wall", icon: "👛", label: "HS Wallet Refunds" },
     ],
   },
 ];

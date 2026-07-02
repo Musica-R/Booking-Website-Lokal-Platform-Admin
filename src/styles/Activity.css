@@ -1,0 +1,625 @@
+/* ===================================================
+   ActivityBookingList.css — Admin Activity Booking Styles
+   Responsive: 1024px | 768px | 420px
+   =================================================== */
+
+/* ---------- Root Tokens ---------- */
+:root {
+  --abl-bg: #f5f6fa;
+  --abl-surface: #ffffff;
+  --abl-border: #e8eaf0;
+  --abl-shadow: 0 1px 4px rgba(0, 0, 0, 0.07), 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  --abl-primary: #4f6ef7;
+  --abl-primary-light: #eef0fe;
+  --abl-primary-hover: #3a58e0;
+
+  --abl-text-primary: #1a1d2e;
+  --abl-text-secondary: #5a6078;
+  --abl-text-muted: #9499b0;
+
+  --abl-success: #16a34a;
+  --abl-success-bg: #dcfce7;
+  --abl-warning: #b45309;
+  --abl-warning-bg: #fef3c7;
+  --abl-danger: #dc2626;
+  --abl-danger-bg: #fee2e2;
+  --abl-info: #0369a1;
+  --abl-info-bg: #e0f2fe;
+  --abl-secondary: #475569;
+  --abl-secondary-bg: #f1f5f9;
+
+  --abl-radius: 10px;
+  --abl-radius-sm: 6px;
+  --abl-font: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ---------- Wrapper ---------- */
+.abl-wrapper {
+  font-family: var(--abl-font);
+  color: var(--abl-text-primary);
+  padding: 28px 32px;
+  min-height: 100vh;
+  background: var(--abl-bg);
+  box-sizing: border-box;
+}
+
+/* ---------- Page Header ---------- */
+.abl-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.abl-header-left h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin: 0 0 4px;
+  color: var(--abl-text-primary);
+}
+
+.abl-header-left p {
+  font-size: 13px;
+  color: var(--abl-text-muted);
+  margin: 0;
+}
+
+.abl-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ---------- Search Bar ---------- */
+.abl-search {
+  position: relative;
+  width: 260px;
+}
+
+.abl-search svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--abl-text-muted);
+  pointer-events: none;
+  width: 15px;
+  height: 15px;
+}
+
+.abl-search input {
+  width: 100%;
+  padding: 8px 12px 8px 34px;
+  border: 1.5px solid var(--abl-border);
+  border-radius: var(--abl-radius-sm);
+  font-size: 13.5px;
+  font-family: var(--abl-font);
+  color: var(--abl-text-primary);
+  background: var(--abl-surface);
+  outline: none;
+  transition: border-color 0.18s;
+  box-sizing: border-box;
+}
+
+.abl-search input:focus {
+  border-color: var(--abl-primary);
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.1);
+}
+
+.abl-search input::placeholder {
+  color: var(--abl-text-muted);
+}
+
+/* ---------- Filter Tabs ---------- */
+.abl-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.abl-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border: 1.5px solid var(--abl-border);
+  background: var(--abl-surface);
+  color: var(--abl-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--abl-font);
+  white-space: nowrap;
+}
+
+.abl-filter-btn:hover {
+  border-color: var(--abl-primary);
+  color: var(--abl-primary);
+  background: var(--abl-primary-light);
+}
+
+.abl-filter-btn.active {
+  background: var(--abl-primary);
+  border-color: var(--abl-primary);
+  color: #fff;
+}
+
+/* ---------- Card ---------- */
+.abl-card {
+  background: var(--abl-surface);
+  border: 1px solid var(--abl-border);
+  border-radius: var(--abl-radius);
+  box-shadow: var(--abl-shadow);
+  overflow: hidden;
+}
+
+/* ---------- Table Wrapper ---------- */
+.abl-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Table ---------- */
+.abl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.abl-table thead tr {
+  background: #f8f9fc;
+  border-bottom: 1.5px solid var(--abl-border);
+}
+
+.abl-table thead th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--abl-text-muted);
+  white-space: nowrap;
+}
+
+.abl-table tbody tr {
+  border-bottom: 1px solid var(--abl-border);
+  transition: background 0.1s;
+}
+
+.abl-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.abl-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.abl-table td {
+  padding: 13px 16px;
+  vertical-align: middle;
+  color: var(--abl-text-primary);
+}
+
+/* ---------- Cell: ID ---------- */
+.abl-cell-id {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--abl-text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Cell: Booking Number ---------- */
+.abl-cell-booking-no {
+  font-size: 11.5px;
+  color: var(--abl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Customer ---------- */
+.abl-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.abl-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.abl-user-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.abl-user-sub {
+  font-size: 11.5px;
+  color: var(--abl-text-muted);
+  margin-top: 1px;
+}
+
+/* ---------- Cell: Vendor / Activity ---------- */
+.abl-vendor-name {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.abl-shop-name {
+  font-size: 11.5px;
+  color: var(--abl-text-muted);
+  margin-top: 2px;
+}
+
+.abl-activity-name {
+  font-size: 11.5px;
+  color: var(--abl-primary);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* ---------- Cell: Date & Time ---------- */
+.abl-date {
+  font-size: 13px;
+  color: var(--abl-text-secondary);
+  white-space: nowrap;
+}
+
+.abl-time {
+  font-size: 11.5px;
+  color: var(--abl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Amount ---------- */
+.abl-amount-total {
+  font-weight: 700;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.abl-amount-sub {
+  font-size: 11px;
+  color: var(--abl-text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Cell: Payment ---------- */
+.abl-payment-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ---------- Badges ---------- */
+.abl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.abl-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.75;
+}
+
+.abl-badge.completed   { background: var(--abl-success-bg); color: var(--abl-success); }
+.abl-badge.pending     { background: var(--abl-warning-bg); color: var(--abl-warning); }
+.abl-badge.confirmed   { background: var(--abl-info-bg);    color: var(--abl-info); }
+.abl-badge.cancelled_by_user,
+.abl-badge.cancelled_by_vendor { background: var(--abl-danger-bg); color: var(--abl-danger); }
+.abl-badge.paid        { background: var(--abl-success-bg); color: var(--abl-success); }
+.abl-badge.unpaid      { background: var(--abl-danger-bg);  color: var(--abl-danger); }
+.abl-badge.secondary   { background: var(--abl-secondary-bg); color: var(--abl-secondary); }
+
+/* ---------- States ---------- */
+.abl-state {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--abl-text-muted);
+}
+
+.abl-state-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.abl-state p {
+  font-size: 14px;
+  margin: 0;
+  color: var(--abl-text-secondary);
+}
+
+.abl-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--abl-border);
+  border-top-color: var(--abl-primary);
+  border-radius: 50%;
+  animation: abl-spin 0.75s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes abl-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Refresh Button ---------- */
+.abl-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--abl-border);
+  border-radius: var(--abl-radius-sm);
+  background: var(--abl-surface);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--abl-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--abl-font);
+}
+
+.abl-refresh-btn:hover {
+  border-color: var(--abl-primary);
+  color: var(--abl-primary);
+}
+
+/* ---------- Pagination ---------- */
+.abl-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 0;
+  flex-wrap: wrap;
+}
+
+.abl-page-btn {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #374151;
+  transition: all 0.15s;
+}
+
+.abl-page-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.abl-page-btn.active {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+  font-weight: 600;
+}
+
+.abl-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===================================================
+   RESPONSIVE — 1024px (Tablet Landscape)
+   =================================================== */
+@media (max-width: 1024px) {
+  .abl-wrapper {
+    padding: 22px 20px;
+  }
+
+  .abl-search {
+    width: 220px;
+  }
+
+  /* Hide less critical column: Payment Status */
+  .abl-table thead th:nth-child(6),
+  .abl-table tbody td:nth-child(6) {
+    display: none;
+  }
+
+  .abl-table th,
+  .abl-table td {
+    padding: 11px 12px;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — 768px (Tablet Portrait)
+   =================================================== */
+@media (max-width: 768px) {
+  .abl-wrapper {
+    padding: 16px 14px;
+  }
+
+  .abl-header {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .abl-header-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .abl-search {
+    width: 100%;
+    flex: 1;
+  }
+
+  .abl-header-left h1 {
+    font-size: 19px;
+  }
+
+  /* Switch to card-style rows instead of wide table */
+  .abl-table,
+  .abl-table thead,
+  .abl-table tbody,
+  .abl-table tr,
+  .abl-table th,
+  .abl-table td {
+    display: block;
+  }
+
+  .abl-table thead {
+    display: none;
+  }
+
+  .abl-table tbody tr {
+    border: 1px solid var(--abl-border);
+    border-radius: var(--abl-radius-sm);
+    margin: 0 12px 10px;
+    padding: 12px;
+    background: var(--abl-surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .abl-table tbody tr:last-child {
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--abl-border);
+  }
+
+  .abl-table td {
+    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border: none;
+    font-size: 13px;
+  }
+
+  .abl-table td::before {
+    content: attr(data-label);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--abl-text-muted);
+    min-width: 90px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .abl-card {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+
+  .abl-table-wrapper {
+    overflow-x: visible;
+  }
+
+  .abl-filters {
+    gap: 5px;
+  }
+
+  .abl-filter-btn {
+    font-size: 12px;
+    padding: 5px 11px;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — 420px (Mobile Small)
+   =================================================== */
+@media (max-width: 420px) {
+  .abl-wrapper {
+    padding: 12px 10px;
+  }
+
+  .abl-header-left h1 {
+    font-size: 17px;
+  }
+
+  .abl-header-left p {
+    font-size: 12px;
+  }
+
+  .abl-header-right {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .abl-search {
+    width: 100%;
+  }
+
+  .abl-refresh-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .abl-filters {
+    gap: 4px;
+  }
+
+  .abl-filter-btn {
+    font-size: 11.5px;
+    padding: 4px 10px;
+  }
+
+  .abl-table tbody tr {
+    margin: 0 0 10px;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .abl-table td {
+    font-size: 12.5px;
+    gap: 6px;
+  }
+
+  .abl-table td::before {
+    font-size: 10px;
+    min-width: 80px;
+  }
+
+  .abl-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .abl-badge {
+    font-size: 10.5px;
+    padding: 2px 7px;
+  }
+
+  .abl-amount-total {
+    font-size: 13px;
+  }
+}
