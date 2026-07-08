@@ -136,6 +136,7 @@ function SettlementCard({ s, onShowQr, onMarkPaid, payingId }) {
 
   return (
     <div className="vs-card">
+      
       <div className="vs-card-header">
         <div className="vs-avatar">{s.vendor_name.charAt(0).toUpperCase()}</div>
         <div className="vs-header-text">
